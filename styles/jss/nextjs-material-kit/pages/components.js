@@ -6,6 +6,11 @@ const componentsStyle = {
     color: "#FFFFFF",
     textAlign: "left",
   },
+  hotel: {
+    marginTop: '-16px',
+    fontWeight: 'bold',
+    color: '#ED960B'
+  },
   title: {
     fontSize: "4.2rem",
     fontWeight: "600",
