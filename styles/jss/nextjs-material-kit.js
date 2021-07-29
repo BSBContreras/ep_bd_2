@@ -42,7 +42,7 @@ const hexToRGBAlpha = function (hexColor, alpha) {
 const drawerWidth = 260;
 
 const transition = {
-  transition: "all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1)",
+  transition: "all 0.2s cubic-bezier(0.685, 0.0473, 0.346, 1)",
 };
 
 const containerFluid = {
@@ -85,18 +85,18 @@ const card = {
 };
 
 const defaultFont = {
-  fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-  fontWeight: "300",
+  fontFamily: ['"Poppins", sans-serif', '"Comfortaa", cursive'],
+  fontWeight: "400",
   lineHeight: "1.5em",
 };
 
-const primaryColor = "#9c27b0";
-const warningColor = "#ff9800";
-const dangerColor = "#f44336";
-const successColor = "#4caf50";
+const primaryColor = "#6263D5"; // 
+const warningColor = "#ED960B"; //
+const dangerColor = "#EB5757"; //
+const successColor = "#27AE60"; //
 const infoColor = "#00acc1";
 const roseColor = "#e91e63";
-const grayColor = "#999999";
+const grayColor = "#222222"; //
 
 const primaryBoxShadow = {
   boxShadow: `0 12px 20px -10px ${hexToRGBAlpha(

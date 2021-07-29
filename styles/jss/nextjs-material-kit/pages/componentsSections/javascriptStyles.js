@@ -8,6 +8,12 @@ const javascriptStyles = {
   section: {
     padding: "70px 0 0",
   },
+  root: {
+    width: '100%',
+  },
+  inline: {
+    display: 'inline',
+  },
   container,
   title: {
     ...title,
