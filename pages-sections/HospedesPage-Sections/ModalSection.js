@@ -99,25 +99,42 @@ const calculateDays = date => {
   return Math.round(daysDate / (1000 * 3600 * 24));
 }
 
+const initialAccommodation = {
+  hospedeResponsavel: {},
+  hospedes: []
+};
+
 export default function ModalSection({ currentAccomodation, setCurrentAccomodation }) {
 
-  const [guests, setGuests] = React.useState([]);
+  const [accommodation, setAccommodation] = React.useState(initialAccommodation);
   const [loading, setLoading] = React.useState(false);
   const [checkout, setCheckout] = React.useState({});
 
+  const clearAccomodation = () => {
+    setAccommodation({...initialAccommodation})
+  }
+
   const handleCloseModal = () => {
     setCurrentAccomodation({});
+    clearAccomodation();
+    setCheckout({});
     setClassicModal(false);
   }
 
   const handlePayment = () => {
-    setCurrentAccomodation({});
-    setClassicModal(false);
+    handleCloseModal();
   }
  
   const handleCheckout = () => {
     setLoading(true);
-    setCheckout(getCheckout());
+    fetch(
+      `https://banco-de-dados-dois.herokuapp.com/checkout/${currentAccomodation.idhospedagem}`
+    ).then(async (response) => {
+      const data = await response.json();
+      setCheckout(data);
+    }).catch(error => {
+      console.log(error)
+    });
     setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -125,7 +142,14 @@ export default function ModalSection({ currentAccomodation, setCurrentAccomodati
 
   React.useEffect(() => { 
     if(currentAccomodation && currentAccomodation.idhospedagem) {
-      setGuests(getAccomodation().hospedes);
+      fetch(
+        `https://banco-de-dados-dois.herokuapp.com/hospedagens/${currentAccomodation.idhospedagem}/hospedes`
+      ).then(async (response) => {
+        const data = await response.json();
+        setAccommodation(data);
+      }).catch(error => {
+        console.log(error)
+      });
       setClassicModal(true); 
     }
   }, [currentAccomodation]);
@@ -160,7 +184,7 @@ export default function ModalSection({ currentAccomodation, setCurrentAccomodati
         >
           <Close className={classes.modalClose} />
         </IconButton>
-        <h4 className={classes.modalTitle}>Detalhes da Hospedagem, Quarto K0{currentAccomodation.num_quarto}</h4>
+        <h4 className={classes.modalTitle}>Detalhes da Hospedagem, Quarto K0{accommodation.num_quarto}</h4>
       </DialogTitle>
       <DialogContent
         id="classic-modal-slide-description"
@@ -173,15 +197,18 @@ export default function ModalSection({ currentAccomodation, setCurrentAccomodati
               <span
                 style={{ fontWeight: 700, color: '#ED960B'}}
               >
-                {` ${calculateDays(currentAccomodation.checkin)} `}
+                {` ${calculateDays(accommodation.checkin)} `}
               </span> 
               dias atás
             </p>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'left', width: '100%' }}>
-              <Avatar alt="Remy Sharp" src={`https://source.unsplash.com/80x80/daily?${currentAccomodation.id_hospede_resp}`} />
+              {
+                accommodation.hospedeResponsavel.nome &&
+                <Avatar alt="Remy Sharp" src={`https://source.unsplash.com/80x80/daily?${accommodation.hospedeResponsavel.nome}`} />
+              }
               <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 12 }}>
                 <span>Hóspede Responsável</span>
-                <span style={{ fontWeight: 700 }}>Hóspede {currentAccomodation.id_hospede_resp}</span>
+                <span style={{ fontWeight: 700 }}>Hóspede {accommodation.hospedeResponsavel.nome}</span>
               </div>
             </div>
             {loading ? (
@@ -208,9 +235,9 @@ export default function ModalSection({ currentAccomodation, setCurrentAccomodati
             }
           </Grid>
           <Grid item sm={6}>
-            <h5 className={classes.modalTitle}>Hóspedes Filiais</h5>
+            <h5 className={classes.modalTitle}>Hóspedes</h5>
             <List className={classes.root}>
-              {guests.map(guest => (
+              {accommodation.hospedes.map(guest => (
                 <ListItem key={guest.idhospede} alignItems="flex-start">
                   <ListItemAvatar>
                     <Avatar alt={guest.nome} src={`https://source.unsplash.com/80x80/daily?${guest.nome}`} />

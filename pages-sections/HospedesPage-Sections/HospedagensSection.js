@@ -45,15 +45,14 @@ export default function HospedagensSection({ setCurrentAccomodation }) {
   const [accommodations, setAccommodations] = React.useState([]);
 
   React.useEffect(() => {
-    setAccommodations(getAccomodations());
-    return;
     fetch(
-      'https://banco-de-dados-dois.herokuapp.com/hospedagens',
-    ).then(data => {
-      console.log(data)
+      'https://banco-de-dados-dois.herokuapp.com/hospedagens'
+    ).then(async (response) => {
+      const data = await response.json();
+      setAccommodations(data);
     }).catch(error => {
       console.log(error)
-    })
+    });
   }, []);
 
   const classes = useStyles();

@@ -5,11 +5,11 @@ import PropTypes from "prop-types";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // material-ui core components
-import { List, ListItem } from "@material-ui/core";
+import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 // @material-ui/icons
-import Favorite from "@material-ui/icons/Favorite";
+import GitHubIcon from "@material-ui/icons/GitHub";
 
 import styles from "styles/jss/nextjs-material-kit/components/footerStyle.js";
 
@@ -31,55 +31,56 @@ export default function Footer(props) {
       <div className={classes.container}>
         <div className={classes.left}>
           <List className={classes.list}>
-            <ListItem className={classes.inlineBlock}>
+            <ListItem  className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/?ref=njsmk-footer"
+                href="https://github.com/BSBContreras/ep_bd_2"
                 className={classes.block}
                 target="_blank"
               >
-                Creative Tim
+                <GitHubIcon className={classes.icon} />
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/presentation?ref=njsmk-footer"
+                href="https://www.linkedin.com/in/shindy-hassobe/"
                 className={classes.block}
                 target="_blank"
               >
-                About us
+                Adalberto Shindy
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="http://blog.creative-tim.com/?ref=njsmk-footer"
+                href="https://www.linkedin.com/in/bruno-contreras/"
                 className={classes.block}
                 target="_blank"
               >
-                Blog
+                Bruno Contreras
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/license?ref=njsmk-footer"
+                href="https://www.linkedin.com/in/lucas-mendes-sales/"
                 className={classes.block}
                 target="_blank"
               >
-                Licenses
+                Lucas Mendes
+              </a>
+            </ListItem>
+            <ListItem className={classes.inlineBlock}>
+              <a
+                href="https://www.linkedin.com/in/victorflopes/"
+                className={classes.block}
+                target="_blank"
+              >
+                Victor Lopes
               </a>
             </ListItem>
           </List>
         </div>
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made with{" "}
-          <Favorite className={classes.icon} /> by{" "}
-          <a
-            href="https://www.creative-tim.com?ref=njsmk-footer"
-            className={aClasses}
-            target="_blank"
-          >
-            Creative Tim
-          </a>{" "}
-          for a better web.
+          &copy; {1900 + new Date().getYear()}, 
+          Universidade de São Paulo
         </div>
       </div>
     </footer>

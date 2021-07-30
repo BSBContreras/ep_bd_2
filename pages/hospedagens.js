@@ -30,12 +30,12 @@ export default function hospedagens(props) {
   const { ...rest } = props;
 
   const [currentAccomodation, setCurrentAccomodation] = React.useState({});
-  console.log(currentAccomodation)
+
   return (
     <div>
       <Header
         brand="KASSINÃO"
-        rightLinks={<HeaderLinks />}
+        // rightLinks={<HeaderLinks />}
         fixed
         color="transparent"
         changeColorOnScroll={{
